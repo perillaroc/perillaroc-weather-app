@@ -1,0 +1,11 @@
+{
+  "name": "perillaroc-weather-app",
+  "description": "Perillaroc's weather app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "bower": "^1.3.1",
+    "express": "3.5.0",
+    "jade": "^1.3.0"
+  }
+}
