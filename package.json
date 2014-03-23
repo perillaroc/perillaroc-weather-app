@@ -4,8 +4,12 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "bower": "^1.3.1",
-    "express": "3.5.0",
-    "jade": "^1.3.0"
+      "grunt": "latest",
+      "grunt-contrib-copy":"latest",
+      "grunt-contrib-watch":"latest",
+      "grunt-contrib-uglify":"latest",
+        "bower": "^1.3.1",
+        "express": "3.5.0",
+        "jade": "^1.3.0"
   }
 }
