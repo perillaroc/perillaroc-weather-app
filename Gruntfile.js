@@ -7,14 +7,19 @@ module.exports = function(grunt){
                     {
                         expand: true,
                         cwd: 'bower_components/bootstrap/dist/',
-                        src: ['**'],
+                        src: [
+                            'css/bootstrap.min.css',
+                            'css/bootstrap-theme.min.css',
+                            'fonts/**',
+                            'js/bootstrap.min.js'
+                        ],
                         dest:'public/'
                     },
                     {
                         expand: true,
                         cwd: 'bower_components/jquery/dist/',
                         src: ['jquery.min.js'],
-                        dest:'public/'
+                        dest:'public/js'
                     }
                 ]
             }
