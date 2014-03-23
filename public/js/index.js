@@ -1,13 +1,13 @@
 
 $(document).ready(function(){
-    var get_weather_url = '//api.openweathermap.org/data/2.5/weather';
+    var get_current_weather_url = '//api.openweathermap.org/data/2.5/weather';
     var param = {
         q: 'Beijing',
         units: 'metric',
         lang: 'zh_cn'
     };
     $.ajax({
-        url: get_weather_url,
+        url: get_current_weather_url,
         data: param,
         success: function(data){
             console.log(data);
@@ -20,7 +20,15 @@ $(document).ready(function(){
             var wind = data.wind;
 
             var now = new Date();
-            var now_str = (now.getMonth()+1)+'月'+now.getDay()+'日 '+now.getHours()+':'+now.getMinutes();
+            var minute = now.getMinutes();
+            if(minute<10)
+                minute = '0'+minute;
+
+            var day_of_week_array = [
+                '周日','周一','周二','周三','周四','周五','周六'
+            ];
+            var day_of_week =day_of_week_array[now.getDay()];
+            var now_str = (now.getMonth()+1)+'月'+now.getDate()+'日 '+ day_of_week+' '+now.getHours()+'时'+minute+'分';
 
             $('<div class="col-md-4"></div>')
                 .append('<div class="row"><div class="col-md-12">'+now_str+'</div></div>')
@@ -29,7 +37,37 @@ $(document).ready(function(){
                 .append('<div class="row"><div class="col-md-12">风速：'+wind.speed+'m/s</div></div>')
                 .append('<div class="row"><div class="col-md-12">湿度：'+main.humidity+'%</div></div>')
                 .appendTo('<div class="row"></div>')
-                .appendTo('.weather');
+                .appendTo('.current_weather');
         }
     });
  });
+
+$(document).ready(function(){
+    var get_forecast_weather_url = "http://api.openweathermap.org/data/2.5/forecast/daily";
+    var params = {
+        q: "Beijing",
+        cnt: 7,
+        units: "metric",
+        lang: "zh_cn"
+    };
+    $.ajax({
+        url: get_forecast_weather_url,
+        data: params,
+        success: function(data){
+            console.log(data);
+            $.each(data.list, function(index, value){
+                var a_date = new Date(value.dt*1000);
+                console.log(a_date);
+
+                var weather = value.weather[0];
+                var weather_icon_url = 'http://openweathermap.org/img/w/'+weather.icon+'.png';
+                console.log('天气：'+weather.description);
+                var temp = value.temp;
+                console.log('温度：'+temp.min+' - '+temp.max);
+
+                console.log('风速：'+value.speed+'m/s');
+            })
+        }
+    });
+
+});
