@@ -1,3 +1,10 @@
+function getWeekOfDayString(a_date){
+    var day_of_week_array = [
+        '周日','周一','周二','周三','周四','周五','周六'
+    ];
+    return day_of_week_array[a_date.getDay()];
+}
+
 
 $(document).ready(function(){
     var get_current_weather_url = '//api.openweathermap.org/data/2.5/weather';
@@ -54,18 +61,25 @@ $(document).ready(function(){
         url: get_forecast_weather_url,
         data: params,
         success: function(data){
+            var container = $('.future_weather');
+
             console.log(data);
+            data.list.shift();
             $.each(data.list, function(index, value){
                 var a_date = new Date(value.dt*1000);
-                console.log(a_date);
+                console.log((a_date.getMonth()+1)+'/'+a_date.getDate()+' '+getWeekOfDayString(a_date));
 
                 var weather = value.weather[0];
                 var weather_icon_url = 'http://openweathermap.org/img/w/'+weather.icon+'.png';
                 console.log('天气：'+weather.description);
                 var temp = value.temp;
                 console.log('温度：'+temp.min+' - '+temp.max);
-
                 console.log('风速：'+value.speed+'m/s');
+
+                container.append('<div class="col-md-1"><p>'+
+                    (a_date.getMonth()+1)+'/'+a_date.getDate()+' '+getWeekOfDayString(a_date)+'</p><p>'+
+                    '<img src='+weather_icon_url+' title="'+weather.description+'">'+'</p>'+
+                    '<p>'+ Math.round(temp.min)+'/'+Math.round(temp.max) +'</p>'+'</div>');
             })
         }
     });

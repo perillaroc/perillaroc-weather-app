@@ -1,4 +1,4 @@
-perillaroc-weather-app
+perillaroc-weather-app-web
 ======================
 
 Perillaroc's weather app.
