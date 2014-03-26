@@ -76,10 +76,11 @@ $(document).ready(function(){
                 console.log('温度：'+temp.min+' - '+temp.max);
                 console.log('风速：'+value.speed+'m/s');
 
-                container.append('<div class="col-md-1"><p>'+
+                container.append('<div class="col-md-1 text-center"><p>'+
                     (a_date.getMonth()+1)+'/'+a_date.getDate()+' '+getWeekOfDayString(a_date)+'</p><p>'+
                     '<img src='+weather_icon_url+' title="'+weather.description+'">'+'</p>'+
-                    '<p>'+ Math.round(temp.min)+'/'+Math.round(temp.max) +'</p>'+'</div>');
+                    '<p>'+ Math.round(temp.min)+'/'+Math.round(temp.max) +'</p>'+
+                    '<p>'+value.speed+'m/s</p>'+'</div>');
             })
         }
     });
